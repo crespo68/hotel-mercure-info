@@ -31,7 +31,6 @@ body{
   color:var(--text);
 }
 
-/* HEADER */
 header{
   padding:18px;
   text-align:center;
@@ -40,7 +39,6 @@ header{
   border-bottom:1px solid var(--border);
 }
 
-/* CONTAINER */
 .container{
   max-width:720px;
   margin:auto;
@@ -48,11 +46,6 @@ header{
 }
 
 /* HOME */
-.home{
-  text-align:center;
-  margin-top:40px;
-}
-
 .hotelBtn{
   width:100%;
   margin:10px 0;
@@ -106,7 +99,6 @@ header{
   color:var(--text2);
 }
 
-/* HIDE */
 .hidden{display:none;}
 </style>
 </head>
@@ -142,33 +134,23 @@ header{
   </div>
 
   <div class="card">
-    <div class="title">🧖 SPA</div>
-    <div class="content">
-      Jacuzzi · Gimnàs · Piscina · Sauna<br>
-      10:00 - 13:00 / 17:00 - 21:00
-    </div>
+    <div class="title">🧖 SPA 📞 647</div>
+    <div class="content" id="spa"></div>
   </div>
 
   <div class="card">
     <div class="title">🍽️ Restauració</div>
-    <div class="content">
-      Esmorzar 07:30 - 11:00<br>
-      Dinar 13:00 - 15:30<br>
-      Sopar 20:00 - 22:30
-    </div>
+    <div class="content" id="food"></div>
   </div>
 
   <div class="card">
     <div class="title">📶 WiFi</div>
-    <div class="content">
-      PRESTIGIHOTEL<br>
-      🔑 prestigi
-    </div>
+    <div class="content" id="wifi"></div>
   </div>
 
   <div class="card">
     <div class="title">🚪 Check-out</div>
-    <div class="content">12:00</div>
+    <div class="content" id="checkout"></div>
   </div>
 
 </div>
@@ -178,12 +160,46 @@ header{
 <script>
 
 let hotels = {
-  mercure: { phone: "750" },
-  novotel: { phone: "720" },
-  andorra: { phone: "701" }
+  mercure: "750",
+  novotel: "720",
+  andorra: "701"
+};
+
+let hotelNames = {
+  mercure: "Hotel Mercure",
+  novotel: "Hotel Novotel",
+  andorra: "Andorra Palace"
+};
+
+let langData = {
+ ca:{
+  spa:"Jacuzzi · Gimnàs · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  food:"🥐 Esmorzar 07:30-11:00<br>🍽️ Dinar 13:00-15:30<br>🍷 Sopar 20:00-22:30",
+  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
+  checkout:"12:00"
+ },
+ es:{
+  spa:"Jacuzzi · Gimnasio · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  food:"🥐 Desayuno 07:30-11:00<br>🍽️ Comida 13:00-15:30<br>🍷 Cena 20:00-22:30",
+  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
+  checkout:"12:00"
+ },
+ fr:{
+  spa:"Jacuzzi · Gym · Piscine · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  food:"Petit-déj 07:30-11:00<br>Déj 13:00-15:30<br>Dîner 20:00-22:30",
+  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
+  checkout:"12:00"
+ },
+ en:{
+  spa:"Jacuzzi · Gym · Pool · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  food:"Breakfast 07:30-11:00<br>Lunch 13:00-15:30<br>Dinner 20:00-22:30",
+  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
+  checkout:"12:00"
+ }
 };
 
 let currentHotel = "mercure";
+let currentLang = "ca";
 
 function selectHotel(hotel){
   currentHotel = hotel;
@@ -192,18 +208,32 @@ function selectHotel(hotel){
   document.getElementById("app").classList.remove("hidden");
 
   document.getElementById("header").innerText =
-    "🏨 " + hotel.toUpperCase().replace("_"," ");
+    "🏨 " + hotelNames[hotel];
 
-  updateData();
-}
-
-function updateData(){
-  document.getElementById("reception").innerHTML =
-    "📞 " + hotels[currentHotel].phone;
+  update();
 }
 
 function setLang(lang){
-  // no necesario aquí (todo fijo excepto idiomas si quieres ampliarlo después)
+  currentLang = lang;
+  update();
+}
+
+function update(){
+
+  document.getElementById("reception").innerHTML =
+    "📞 " + hotels[currentHotel];
+
+  document.getElementById("spa").innerHTML =
+    langData[currentLang].spa;
+
+  document.getElementById("food").innerHTML =
+    langData[currentLang].food;
+
+  document.getElementById("wifi").innerHTML =
+    langData[currentLang].wifi;
+
+  document.getElementById("checkout").innerHTML =
+    langData[currentLang].checkout;
 }
 
 </script>
