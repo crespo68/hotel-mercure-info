@@ -133,14 +133,15 @@ header{
     </div>
   </div>
 
+  <!-- RESTAURANTE -->
   <div class="card">
-    <div class="title">🧖 SPA 📞 647</div>
-    <div class="content" id="spa"></div>
+    <div class="title" id="foodTitle">🍽️ Restaurant</div>
+    <div class="content" id="food"></div>
   </div>
 
   <div class="card">
-    <div class="title">🍽️ Restaurant</div>
-    <div class="content" id="food"></div>
+    <div class="title">🧖 SPA 📞 647</div>
+    <div class="content" id="spa"></div>
   </div>
 
   <div class="card">
@@ -176,6 +177,13 @@ let receptionTitles = {
   es: "Recepción",
   fr: "Réception",
   en: "Reception"
+};
+
+let foodTitles = {
+  ca: "Restaurant",
+  es: "Restaurante",
+  fr: "Restaurant",
+  en: "Restaurant"
 };
 
 let langData = {
@@ -231,14 +239,22 @@ function setLang(lang){
 
 function update(){
 
+  // RECEPCIÓN
   document.getElementById("receptionTitle").innerText =
     `${receptionTitles[currentLang]} 24H 📞 ${hotels[currentHotel]}`;
 
   document.getElementById("receptionText").innerHTML =
     langData[currentLang].reception;
 
+  // RESTAURANTE
+  document.getElementById("foodTitle").innerText =
+    foodTitles[currentLang];
+
+  document.getElementById("food").innerHTML =
+    langData[currentLang].food;
+
+  // RESTO
   document.getElementById("spa").innerHTML = langData[currentLang].spa;
-  document.getElementById("food").innerHTML = langData[currentLang].food;
   document.getElementById("wifi").innerHTML = langData[currentLang].wifi;
   document.getElementById("checkout").innerHTML = langData[currentLang].checkout;
 }
