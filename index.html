@@ -3,115 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Mercure</title>
+<title>Hotel Info</title>
 
 <style>
-:root {
-  --bg: #0b1220;
-  --card: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.08);
-  --text: #e5e7eb;
-  --text2: #cbd5e1;
+:root{
+  --bg:#0b1220;
+  --card:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.08);
+  --text:#e5e7eb;
+  --text2:#cbd5e1;
 }
 
-/* 🌞 LIGHT MODE AUTOMATIC */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f5f7fb;
-    --card: #ffffff;
-    --border: #e5e7eb;
-    --text: #111827;
-    --text2: #374151;
-  }
+@media (prefers-color-scheme: light){
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --text:#111827;
+  --text2:#374151;
+}
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-  background: var(--bg);
-  color: var(--text);
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
 }
 
 /* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  padding: 18px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+header{
+  padding:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  border-bottom:1px solid var(--border);
 }
 
 /* CONTAINER */
-.container {
-  max-width: 720px;
-  margin: auto;
-  padding: 15px;
+.container{
+  max-width:720px;
+  margin:auto;
+  padding:15px;
 }
 
-/* LANG BUTTONS */
-.lang {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 18px 0 25px;
+/* HOME */
+.home{
+  text-align:center;
+  margin-top:40px;
 }
 
-.lang button {
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
+.hotelBtn{
+  width:100%;
+  margin:10px 0;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.lang button:hover {
-  transform: scale(1.05);
+/* LANG */
+.lang{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:15px 0 25px;
 }
 
-/* CARDS */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  transition: 0.2s;
+.lang button{
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.card:hover {
-  transform: translateY(-2px);
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px 16px;
+  margin-bottom:12px;
 }
 
-.title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 6px;
+.title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:6px;
 }
 
-.content {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text2);
+.content{
+  font-size:14px;
+  line-height:1.5;
+  color:var(--text2);
 }
+
+/* HIDE */
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
-<header>🏨 Hotel Mercure</header>
+<header id="header">🏨 Hotel Info</header>
 
 <div class="container">
 
-  <!-- LANG -->
+<!-- HOME -->
+<div id="home">
+  <h2 style="text-align:center;">Selecciona hotel</h2>
+
+  <button class="hotelBtn" onclick="selectHotel('mercure')">🏨 Hotel Mercure</button>
+  <button class="hotelBtn" onclick="selectHotel('novotel')">🏨 Hotel Novotel</button>
+  <button class="hotelBtn" onclick="selectHotel('andorra')">🏨 Andorra Palace</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+
   <div class="lang">
     <button onclick="setLang('ca')">Català</button>
     <button onclick="setLang('es')">Español</button>
@@ -119,126 +136,75 @@ header {
     <button onclick="setLang('en')">English</button>
   </div>
 
-  <!-- CARDS -->
   <div class="card">
-    <div class="title" id="t1"></div>
+    <div class="title">📞 Recepció</div>
     <div class="content" id="reception"></div>
   </div>
 
   <div class="card">
-    <div class="title" id="t2"></div>
-    <div class="content" id="spa"></div>
+    <div class="title">🧖 SPA</div>
+    <div class="content">
+      Jacuzzi · Gimnàs · Piscina · Sauna<br>
+      10:00 - 13:00 / 17:00 - 21:00
+    </div>
   </div>
 
   <div class="card">
-    <div class="title" id="t3"></div>
-    <div class="content" id="food"></div>
+    <div class="title">🍽️ Restauració</div>
+    <div class="content">
+      Esmorzar 07:30 - 11:00<br>
+      Dinar 13:00 - 15:30<br>
+      Sopar 20:00 - 22:30
+    </div>
   </div>
 
   <div class="card">
-    <div class="title" id="t4"></div>
-    <div class="content" id="wifi"></div>
+    <div class="title">📶 WiFi</div>
+    <div class="content">
+      PRESTIGIHOTEL<br>
+      🔑 prestigi
+    </div>
   </div>
 
   <div class="card">
-    <div class="title" id="t5"></div>
-    <div class="content" id="checkout"></div>
+    <div class="title">🚪 Check-out</div>
+    <div class="content">12:00</div>
   </div>
+
+</div>
 
 </div>
 
 <script>
 
-function setLang(lang){
-
-const data = {
- ca:{
-  t1:"Recepció 24H 📞 750",
-  reception:"Si teniu preguntes o necessiteu ajuda",
-
-  t2:"SPA 📞 647",
-  spa:"Jacuzzi · Gimnàs · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
-
-  t3:"Restauració",
-  food:"🥐 Esmorzar: 07:30 - 11:00<br>🍽️ Dinar: 13:00 - 15:30<br>🍷 Sopar: 20:00 - 22:30",
-
-  t4:"WiFi",
-  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
-
-  t5:"Check-out",
-  checkout:"12:00"
- },
- es:{
-  t1:"Recepción 24H 📞 750",
-  reception:"Si tiene preguntas o necesita ayuda",
-
-  t2:"SPA 📞 647",
-  spa:"Jacuzzi · Gimnasio · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
-
-  t3:"Restauración",
-  food:"🥐 Desayuno: 07:30 - 11:00<br>🍽️ Comida: 13:00 - 15:30<br>🍷 Cena: 20:00 - 22:30",
-
-  t4:"WiFi",
-  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
-
-  t5:"Check-out",
-  checkout:"12:00"
- },
- fr:{
-  t1:"Réception 24H 📞 750",
-  reception:"Si vous avez des questions ou besoin d'aide",
-
-  t2:"SPA 📞 647",
-  spa:"Jacuzzi · Gym · Piscine · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
-
-  t3:"Restauration",
-  food:"Petit-déj 07:30 - 11:00<br>Déj 13:00 - 15:30<br>Dîner 20:00 - 22:30",
-
-  t4:"WiFi",
-  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
-
-  t5:"Check-out",
-  checkout:"12:00"
- },
- en:{
-  t1:"Reception 24H 📞 750",
-  reception:"If you have questions or need help",
-
-  t2:"SPA 📞 647",
-  spa:"Jacuzzi · Gym · Pool · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
-
-  t3:"Dining",
-  food:"Breakfast 07:30 - 11:00<br>Lunch 13:00 - 15:30<br>Dinner 20:00 - 22:30",
-
-  t4:"WiFi",
-  wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
-
-  t5:"Check-out",
-  checkout:"12:00"
- }
+let hotels = {
+  mercure: { phone: "750" },
+  novotel: { phone: "720" },
+  andorra: { phone: "701" }
 };
 
-let t = data[lang];
+let currentHotel = "mercure";
 
-document.getElementById("t1").innerHTML = t.t1;
-document.getElementById("reception").innerHTML = t.reception;
+function selectHotel(hotel){
+  currentHotel = hotel;
 
-document.getElementById("t2").innerHTML = t.t2;
-document.getElementById("spa").innerHTML = t.spa;
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 
-document.getElementById("t3").innerHTML = t.t3;
-document.getElementById("food").innerHTML = t.food;
+  document.getElementById("header").innerText =
+    "🏨 " + hotel.toUpperCase().replace("_"," ");
 
-document.getElementById("t4").innerHTML = t.t4;
-document.getElementById("wifi").innerHTML = t.wifi;
-
-document.getElementById("t5").innerHTML = t.t5;
-document.getElementById("checkout").innerHTML = t.checkout;
-
+  updateData();
 }
 
-// default language
-setLang("ca");
+function updateData(){
+  document.getElementById("reception").innerHTML =
+    "📞 " + hotels[currentHotel].phone;
+}
+
+function setLang(lang){
+  // no necesario aquí (todo fijo excepto idiomas si quieres ampliarlo después)
+}
 
 </script>
 
