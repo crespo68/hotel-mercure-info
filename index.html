@@ -45,7 +45,6 @@ header{
   padding:15px;
 }
 
-/* HOME */
 .hotelBtn{
   width:100%;
   margin:10px 0;
@@ -59,7 +58,6 @@ header{
   cursor:pointer;
 }
 
-/* LANG */
 .lang{
   display:flex;
   justify-content:center;
@@ -78,7 +76,6 @@ header{
   cursor:pointer;
 }
 
-/* CARD */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -128,13 +125,10 @@ header{
     <button onclick="setLang('en')">English</button>
   </div>
 
-  <!-- RECEPCIÓN -->
+  <!-- RECEPCIÓN (YA UNIFICADO) -->
   <div class="card">
     <div class="title">📞 Recepció</div>
-    <div class="content">
-      <div id="receptionPhone"></div>
-      <div id="receptionText"></div>
-    </div>
+    <div class="content" id="reception"></div>
   </div>
 
   <div class="card">
@@ -177,28 +171,28 @@ let hotelNames = {
 
 let langData = {
  ca:{
-  reception:"Si teniu preguntes o necessiteu ajuda",
+  receptionText:"Si teniu preguntes o necessiteu ajuda",
   spa:"Jacuzzi · Gimnàs · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
   food:"🥐 Esmorzar 07:30-11:00<br>🍽️ Dinar 13:00-15:30<br>🍷 Sopar 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  es:{
-  reception:"Si tiene preguntas o necesita ayuda",
+  receptionText:"Si tiene preguntas o necesita ayuda",
   spa:"Jacuzzi · Gimnasio · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
   food:"🥐 Desayuno 07:30-11:00<br>🍽️ Comida 13:00-15:30<br>🍷 Cena 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  fr:{
-  reception:"Si vous avez des questions ou besoin d'aide",
+  receptionText:"Si vous avez des questions ou besoin d'aide",
   spa:"Jacuzzi · Gym · Piscine · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
   food:"Petit-déj 07:30-11:00<br>Déj 13:00-15:30<br>Dîner 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  en:{
-  reception:"If you have questions or need help",
+  receptionText:"If you have questions or need help",
   spa:"Jacuzzi · Gym · Pool · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
   food:"Breakfast 07:30-11:00<br>Lunch 13:00-15:30<br>Dinner 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
@@ -228,11 +222,11 @@ function setLang(lang){
 
 function update(){
 
-  document.getElementById("receptionPhone").innerHTML =
-    "📞 Recepció 24H " + hotels[currentHotel];
-
-  document.getElementById("receptionText").innerHTML =
-    langData[currentLang].reception;
+  // RECEPCIÓN (TODO JUNTO EN UNA LÍNEA)
+  document.getElementById("reception").innerHTML =
+    "📞 Recepció 24H " + hotels[currentHotel] +
+    "<br>" +
+    langData[currentLang].receptionText;
 
   document.getElementById("spa").innerHTML = langData[currentLang].spa;
   document.getElementById("food").innerHTML = langData[currentLang].food;
