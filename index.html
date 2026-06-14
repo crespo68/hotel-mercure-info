@@ -1,3 +1,219 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Mercure</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+  }
+
+  header {
+    background: #1f2a44;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .lang {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .lang button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #ddd;
+    font-weight: bold;
+  }
+
+  .lang button:hover {
+    background: #bbb;
+  }
+
+  .card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+
+<body>
+
+<header>Hotel Mercure</header>
+
+<div class="container">
+
+  <div class="lang">
+    <button onclick="setLang('ca')">Català</button>
+    <button onclick="setLang('es')">Español</button>
+    <button onclick="setLang('fr')">Français</button>
+    <button onclick="setLang('en')">English</button>
+  </div>
+
+  <div id="content">
+
+    <div class="card">
+      <div class="title" id="r_title"></div>
+      <div id="reception"></div>
+    </div>
+
+    <div class="card">
+      <div class="title" id="spa_title"></div>
+      <div id="spa"></div>
+    </div>
+
+    <div class="card">
+      <div class="title" id="food_title"></div>
+      <div id="food"></div>
+    </div>
+
+    <div class="card">
+      <div class="title" id="wifi_title"></div>
+      <div id="wifi"></div>
+    </div>
+
+    <div class="card">
+      <div class="title" id="checkout_title"></div>
+      <div id="checkout"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+function setLang(lang) {
+
+  localStorage.setItem("lang", lang);
+
+  const data = {
+
+    ca: {
+      r_title: "Recepció",
+      reception: "📞 Telèfon: 750",
+
+      spa_title: "SPA (Gratuït per a hostes)",
+      spa: "Jacuzzi · Gimnàs · Piscina · Sauna<br>Horari: 10:00 - 13:00 / 17:00 - 21:00<br>📞 SPA: 647",
+
+      food_title: "Restauració",
+      food: "🥐 Esmorzar: 07:30 - 11:00<br>🍽️ Dinar: 13:00 - 15:30<br>🍷 Sopar: 20:00 - 22:30",
+
+      wifi_title: "WiFi",
+      wifi: "📶 Xarxa: PRESTIGIHOTEL<br>🔑 Contrasenya: prestigi",
+
+      checkout_title: "Check-out",
+      checkout: "🚪 Hora de sortida: 12:00"
+    },
+
+    es: {
+      r_title: "Recepción",
+      reception: "📞 Teléfono: 750",
+
+      spa_title: "SPA (Gratis para huéspedes)",
+      spa: "Jacuzzi · Gimnasio · Piscina · Sauna<br>Horario: 10:00 - 13:00 / 17:00 - 21:00<br>📞 SPA: 647",
+
+      food_title: "Restauración",
+      food: "🥐 Desayuno: 07:30 - 11:00<br>🍽️ Comida: 13:00 - 15:30<br>🍷 Cena: 20:00 - 22:30",
+
+      wifi_title: "WiFi",
+      wifi: "📶 Red: PRESTIGIHOTEL<br>🔑 Contraseña: prestigi",
+
+      checkout_title: "Check-out",
+      checkout: "🚪 Hora de salida: 12:00"
+    },
+
+    fr: {
+      r_title: "Réception",
+      reception: "📞 Téléphone: 750",
+
+      spa_title: "SPA (gratuit pour les clients)",
+      spa: "Jacuzzi · Salle de sport · Piscine · Sauna<br>Horaires: 10:00 - 13:00 / 17:00 - 21:00<br>📞 SPA: 647",
+
+      food_title: "Restauration",
+      food: "🥐 Petit-déjeuner: 07:30 - 11:00<br>🍽️ Déjeuner: 13:00 - 15:30<br>🍷 Dîner: 20:00 - 22:30",
+
+      wifi_title: "WiFi",
+      wifi: "📶 Réseau: PRESTIGIHOTEL<br>🔑 Mot de passe: prestigi",
+
+      checkout_title: "Check-out",
+      checkout: "🚪 Heure de départ: 12:00"
+    },
+
+    en: {
+      r_title: "Reception",
+      reception: "📞 Phone: 750",
+
+      spa_title: "SPA (Free for guests)",
+      spa: "Jacuzzi · Gym · Pool · Sauna<br>Hours: 10:00 - 13:00 / 17:00 - 21:00<br>📞 SPA: 647",
+
+      food_title: "Dining",
+      food: "🥐 Breakfast: 07:30 - 11:00<br>🍽️ Lunch: 13:00 - 15:30<br>🍷 Dinner: 20:00 - 22:30",
+
+      wifi_title: "WiFi",
+      wifi: "📶 Network: PRESTIGIHOTEL<br>🔑 Password: prestigi",
+
+      checkout_title: "Check-out",
+      checkout: "🚪 Departure: 12:00"
+    }
+  };
+
+  const t = data[lang];
+
+  document.getElementById("r_title").innerHTML = t.r_title;
+  document.getElementById("reception").innerHTML = t.reception;
+
+  document.getElementById("spa_title").innerHTML = t.spa_title;
+  document.getElementById("spa").innerHTML = t.spa;
+
+  document.getElementById("food_title").innerHTML = t.food_title;
+  document.getElementById("food").innerHTML = t.food;
+
+  document.getElementById("wifi_title").innerHTML = t.wifi_title;
+  document.getElementById("wifi").innerHTML = t.wifi;
+
+  document.getElementById("checkout_title").innerHTML = t.checkout_title;
+  document.getElementById("checkout").innerHTML = t.checkout;
+}
+
+// cargar idioma guardado o catalán por defecto
+setLang(localStorage.getItem("lang") || "ca");
+
+</script>
+
+</body>
+</html>
 <style>
   body {
     margin: 0;
