@@ -266,6 +266,7 @@ let spaExtraData = {
 
 let currentHotel = "mercure";
 let currentLang = "ca";
+let spaOpen = false;
 
 function selectHotel(hotel){
   currentHotel = hotel;
@@ -306,19 +307,27 @@ function update(){
 
   document.getElementById("checkout").innerHTML =
     langData[currentLang].checkout;
+
+  // 🔥 FIX IMPORTANTE: mantener idioma en el desplegable
+  if(spaOpen){
+    document.getElementById("spaExtra").innerHTML =
+      spaExtraData[currentLang];
+  }
 }
 
 function toggleSpaInfo(){
   let el = document.getElementById("spaExtra");
   let btn = document.querySelector(".moreBtn");
 
-  if(el.classList.contains("open")){
-    el.classList.remove("open");
-    btn.innerHTML = "More info 🔽";
-  } else {
+  spaOpen = !spaOpen;
+
+  if(spaOpen){
     el.classList.add("open");
     btn.innerHTML = "More info 🔼";
     el.innerHTML = spaExtraData[currentLang];
+  } else {
+    el.classList.remove("open");
+    btn.innerHTML = "More info 🔽";
   }
 }
 
