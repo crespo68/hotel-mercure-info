@@ -97,6 +97,38 @@ header{
 }
 
 .hidden{display:none;}
+
+/* SPA MORE INFO */
+.moreBtn{
+  margin-top:10px;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font-weight:600;
+}
+
+.moreBtn:hover{
+  background:var(--card);
+}
+
+.spa-extra{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:all 0.35s ease;
+  margin-top:0;
+  font-size:14px;
+  color:var(--text2);
+}
+
+.spa-extra.open{
+  max-height:200px;
+  opacity:1;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -139,9 +171,17 @@ header{
     <div class="content" id="food"></div>
   </div>
 
+  <!-- SPA -->
   <div class="card">
     <div class="title">🧖 SPA 📞 647</div>
+
     <div class="content" id="spa"></div>
+
+    <button class="moreBtn" onclick="toggleSpaInfo()">
+      More info 🔽
+    </button>
+
+    <div id="spaExtra" class="spa-extra"></div>
   </div>
 
   <div class="card">
@@ -189,32 +229,39 @@ let foodTitles = {
 let langData = {
  ca:{
   reception:"teniu preguntes o necessiteu ajuda",
-  spa:"Jacuzzi · Gimnàs · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  spa:"🛁 Jacuzzi<br>🏋️ Gimnàs<br>🏊 Piscina<br>🔥 Sauna<br><br>🕒 10:00 - 13:00 / 17:00 - 21:00",
   food:"🥐 Esmorzar 07:30-11:00<br>🍽️ Dinar 13:00-15:30<br>🍷 Sopar 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  es:{
   reception:"si tiene preguntas o necesita ayuda",
-  spa:"Jacuzzi · Gimnasio · Piscina · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  spa:"🛁 Jacuzzi<br>🏋️ Gimnasio<br>🏊 Piscina<br>🔥 Sauna<br><br>🕒 10:00 - 13:00 / 17:00 - 21:00",
   food:"🥐 Desayuno 07:30-11:00<br>🍽️ Comida 13:00-15:30<br>🍷 Cena 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  fr:{
   reception:"si vous avez des questions ou besoin d'aide",
-  spa:"Jacuzzi · Gym · Piscine · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  spa:"🛁 Jacuzzi<br>🏋️ Gym<br>🏊 Piscine<br>🔥 Sauna<br><br>🕒 10:00 - 13:00 / 17:00 - 21:00",
   food:"Petit-déj 07:30-11:00<br>Déj 13:00-15:30<br>Dîner 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  },
  en:{
   reception:"if you have questions or need help",
-  spa:"Jacuzzi · Gym · Pool · Sauna<br>10:00 - 13:00 / 17:00 - 21:00",
+  spa:"🛁 Jacuzzi<br>🏋️ Gym<br>🏊 Pool<br>🔥 Sauna<br><br>🕒 10:00 - 13:00 / 17:00 - 21:00",
   food:"Breakfast 07:30-11:00<br>Lunch 13:00-15:30<br>Dinner 20:00-22:30",
   wifi:"PRESTIGIHOTEL<br>🔑 prestigi",
   checkout:"12:00"
  }
+};
+
+let spaExtraData = {
+  ca:"Es necessita una moneda de 2€ per a les taquilles.<br>Es proporcionen tovalloles i gorro de bany si es desitja (opcional).",
+  es:"Se necesita una moneda de 2€ para las taquillas.<br>Se entregan toallas y gorro de baño si se desea (opcional).",
+  fr:"Une pièce de 2€ est nécessaire pour les casiers.<br>Des serviettes et un bonnet de bain sont fournis si vous le souhaitez (optionnel).",
+  en:"A 2€ coin is required for lockers.<br>Towels and a swimming cap are provided if requested (optional)."
 };
 
 let currentHotel = "mercure";
@@ -239,24 +286,40 @@ function setLang(lang){
 
 function update(){
 
-  // RECEPCIÓN
   document.getElementById("receptionTitle").innerText =
     `${receptionTitles[currentLang]} 24H 📞 ${hotels[currentHotel]}`;
 
   document.getElementById("receptionText").innerHTML =
     langData[currentLang].reception;
 
-  // RESTAURANTE
   document.getElementById("foodTitle").innerText =
     foodTitles[currentLang];
 
   document.getElementById("food").innerHTML =
     langData[currentLang].food;
 
-  // RESTO
-  document.getElementById("spa").innerHTML = langData[currentLang].spa;
-  document.getElementById("wifi").innerHTML = langData[currentLang].wifi;
-  document.getElementById("checkout").innerHTML = langData[currentLang].checkout;
+  document.getElementById("spa").innerHTML =
+    langData[currentLang].spa;
+
+  document.getElementById("wifi").innerHTML =
+    langData[currentLang].wifi;
+
+  document.getElementById("checkout").innerHTML =
+    langData[currentLang].checkout;
+}
+
+function toggleSpaInfo(){
+  let el = document.getElementById("spaExtra");
+  let btn = document.querySelector(".moreBtn");
+
+  if(el.classList.contains("open")){
+    el.classList.remove("open");
+    btn.innerHTML = "More info 🔽";
+  } else {
+    el.classList.add("open");
+    btn.innerHTML = "More info 🔼";
+    el.innerHTML = spaExtraData[currentLang];
+  }
 }
 
 </script>
